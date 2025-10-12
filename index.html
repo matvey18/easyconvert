@@ -1,0 +1,386 @@
+<!--
+EasyTools single file
+Автор и эксперт: Я отвечаю как эксперт по интернет маркетингу с 15 годами опыта
+Назначение: готовый одностраничный мультиутилитный сайт для быстрой развертки и теста в SEO и рекламе
+Инструкция кратко
+1. Сохраните этот файл как index.html
+2. Проверьте локально: откройте в браузере
+3. Для быстрого хостинга загрузите в репозиторий GitHub и включите GitHub Pages или разверните на Netlify/Vercel
+4. Для SEO и монетизации создайте отдельные статические страницы под каждый инструмент на базе этого шаблона. В документе ниже есть раздел с рекомендациями по SEO и монетизации.
+
+30 дней план запуска описан в конце файла
+-->
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EasyTools | Набор быстрых онлайн инструментов</title>
+  <meta name="description" content="Набор быстрых утилит онлайн. Счетчик слов, генератор паролей, калькуляторы процентов, кодирование Base64, генератор QR и другие простые инструменты.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="EasyTools | Быстрые онлайн утилиты">
+  <meta property="og:description" content="Удобные и быстрые утилиты: генератор паролей, счетчик слов, калькуляторы, QR генератор. Работает прямо в браузере.">
+  <meta property="og:url" content="https://yourdomain.example/">
+  <meta name="theme-color" content="#1f2937">
+
+  <style>
+    :root{--bg:#f7f7fb;--card:#ffffff;--accent:#2563eb;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,rgba(37,99,235,0.05),transparent);padding:20px 16px}
+    .wrap{max-width:1100px;margin:18px auto;padding:0 16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:6px 0 0;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:260px 1fr;gap:18px;margin-top:18px}
+    nav.card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+    nav a{display:block;padding:10px;border-radius:8px;color:#111;text-decoration:none;margin-bottom:6px}
+    nav a.active{background:linear-gradient(90deg,rgba(37,99,235,0.06),transparent);font-weight:600}
+    main.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+    .tool{display:none}
+    .tool.active{display:block}
+    .tool h2{margin-top:0}
+    textarea,input,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px}
+    .row{display:flex;gap:10px}
+    .row > *{flex:1}
+    .btn{display:inline-block;padding:8px 12px;border-radius:10px;background:var(--accent);color:white;border:none;cursor:pointer}
+    .muted{color:var(--muted);font-size:13px}
+    .small{font-size:13px}
+    .card-inline{padding:12px;border-radius:8px;background:#f1f5f9;margin-top:10px}
+    footer{margin:30px 0;text-align:center;color:var(--muted);font-size:13px}
+    @media(max-width:880px){.grid{grid-template-columns:1fr;}.logo{width:40px;height:40px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo">ET</div>
+        <div>
+          <h1>EasyTools</h1>
+          <p class="lead">Набор быстрых онлайн инструментов. Работает прямо в браузере без регистрации</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="grid">
+      <nav class="card" id="menu">
+        <a href="#char" data-tool="char">Счетчик символов и слов</a>
+        <a href="#password" data-tool="password">Генератор паролей</a>
+        <a href="#percent" data-tool="percent">Калькулятор процентов</a>
+        <a href="#vat" data-tool="vat">Калькулятор НДС</a>
+        <a href="#base64" data-tool="base64">Base64 кодирование</a>
+        <a href="#qr" data-tool="qr">Генератор QR</a>
+        <a href="#timer" data-tool="timer">Таймер и секундомер</a>
+        <a href="#color" data-tool="color">Hex RGB конвертер</a>
+      </nav>
+
+      <main class="card" id="content">
+
+        <section id="char" class="tool">
+          <h2>Счетчик символов и слов</h2>
+          <p class="muted">Вставьте текст ниже. Счётчик обновляется при вводе.</p>
+          <textarea id="charText" rows="8" placeholder="Вставьте текст"></textarea>
+          <div class="card-inline small" id="charStats">Слова 0. Символы 0. Примерное время чтения 0 минут.</div>
+          <div style="margin-top:8px">
+            <button class="btn" id="copyChar">Копировать текст</button>
+          </div>
+          <article style="margin-top:12px;color:var(--muted)">
+            <h3>Описание</h3>
+            <p>Этот инструмент полезен для быстрых подсчётов длины текста при подготовке постов, заголовков или метаописаний. Для лучшей индексации создавайте отдельные страницы с ключевыми фразами вида «счётчик слов онлайн» и добавляйте 150 300 слов объяснения для SEO.</p>
+          </article>
+        </section>
+
+        <section id="password" class="tool">
+          <h2>Генератор паролей</h2>
+          <div class="row" style="margin-bottom:8px">
+            <input type="number" id="pwLen" min="4" max="64" value="16">
+            <select id="pwPreset"><option value="custom">Пользовательский</option><option value="strong">Сильный</option><option value="memorable">Легко запомнить</option></select>
+          </div>
+          <div style="margin-bottom:8px">
+            <label class="small"><input type="checkbox" id="pwUpper" checked> Заглавные</label>
+            &nbsp; <label class="small"><input type="checkbox" id="pwLower" checked> Строчные</label>
+            &nbsp; <label class="small"><input type="checkbox" id="pwNumbers" checked> Цифры</label>
+            &nbsp; <label class="small"><input type="checkbox" id="pwSymbols"> Символы</label>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="pwOut" readonly>
+            <button class="btn" id="genPw">Сгенерировать</button>
+          </div>
+          <div style="margin-top:10px;color:var(--muted)">Используйте длинные уникальные пароли для безопасности. Генератор работает локально и никому ничего не отправляет.</div>
+        </section>
+
+        <section id="percent" class="tool">
+          <h2>Калькулятор процентов</h2>
+          <div class="row">
+            <input id="percentValue" placeholder="Сумма" type="number">
+            <input id="percentPercent" placeholder="Процент" type="number">
+          </div>
+          <div style="margin-top:8px">
+            <button class="btn" id="calcPercent">Посчитать</button>
+            <div id="percentResult" style="margin-top:8px" class="muted"></div>
+          </div>
+          <article style="margin-top:12px;color:var(--muted)">
+            <h3>Описание</h3>
+            <p>Быстрый калькулятор процентов для скидок, прироста и налогов. Страницы с такими инструментами хорошо конвертируются в трафик через поисковые запросы вида «сколько будет 15 процентов от 2500».</p>
+          </article>
+        </section>
+
+        <section id="vat" class="tool">
+          <h2>Калькулятор НДС</h2>
+          <div class="row">
+            <input id="vatAmount" placeholder="Сумма" type="number">
+            <input id="vatRate" placeholder="Ставка, %" type="number" value="20">
+          </div>
+          <div style="margin-top:8px">
+            <button class="btn" id="calcVat">Посчитать</button>
+            <div id="vatResult" style="margin-top:8px" class="muted"></div>
+          </div>
+        </section>
+
+        <section id="base64" class="tool">
+          <h2>Base64 кодирование и декодирование</h2>
+          <textarea id="b64Text" rows="6" placeholder="Текст или Base64"></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" id="encodeB64">Кодировать</button>
+            <button class="btn" id="decodeB64">Декодировать</button>
+            <button class="btn" id="copyB64">Копировать</button>
+          </div>
+          <div style="margin-top:8px;color:var(--muted)">Полезно для быстрой проверки Base64 и работы с небольшими строками. Для больших файлов используйте специализированные инструменты.</div>
+        </section>
+
+        <section id="qr" class="tool">
+          <h2>Генератор QR кода</h2>
+          <input id="qrText" placeholder="Текст или URL для QR">
+          <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+            <input id="qrSize" type="number" value="200" min="100" max="1000" style="width:110px">
+            <button class="btn" id="genQr">Сгенерировать</button>
+            <button class="btn" id="downloadQr">Скачать</button>
+          </div>
+          <div style="margin-top:12px">
+            <img id="qrPreview" alt="qr preview" style="border:1px solid #e6e9ef;border-radius:8px">
+          </div>
+          <div style="margin-top:10px;color:var(--muted)">QR создаётся через Chart API. Если нужен оффлайн генератор, замените на qrcodejs или аналог.</div>
+        </section>
+
+        <section id="timer" class="tool">
+          <h2>Таймер и секундомер</h2>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="timerInput" placeholder="Секунд" type="number">
+            <button class="btn" id="startTimer">Запустить таймер</button>
+            <button class="btn" id="stopTimer">Остановить</button>
+            <button class="btn" id="resetTimer">Сброс</button>
+          </div>
+          <div style="margin-top:12px;font-size:22px" id="timerDisplay">00:00</div>
+          <div style="margin-top:12px;color:var(--muted)">Простой таймер и секундомер для задач и напоминаний.</div>
+        </section>
+
+        <section id="color" class="tool">
+          <h2>Hex RGB конвертер</h2>
+          <div class="row">
+            <input id="hexInput" placeholder="#rrggbb или rrggbb">
+            <input id="rgbInput" placeholder="rgb(255,255,255)">
+          </div>
+          <div style="margin-top:8px">
+            <button class="btn" id="hexToRgb">Преобразовать</button>
+            <div id="colorResult" style="margin-top:8px;color:var(--muted)"></div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <footer>
+      <div>EasyTools. Сделано для теста и запуска MVP с монетизацией через рекламу.</div>
+      <div style="margin-top:6px">Если нужно, можно расширить набор утилит и подготовить отдельные статические страницы для SEO.</div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Простая маршрутизация по hash
+    const tools = Array.from(document.querySelectorAll('.tool'))
+    const menuLinks = Array.from(document.querySelectorAll('nav a'))
+    function showTool(slug){
+      tools.forEach(t => t.classList.remove('active'))
+      menuLinks.forEach(a => a.classList.remove('active'))
+      const el = document.getElementById(slug)
+      if(el) el.classList.add('active')
+      const link = menuLinks.find(a => a.dataset.tool === slug)
+      if(link) link.classList.add('active')
+      document.title = 'EasyTools | ' + (el ? el.querySelector('h2').innerText : 'Утилиты')
+    }
+    function route(){
+      const hash = location.hash.replace('#','') || 'char'
+      const slug = hash.split('/')[0]
+      showTool(slug)
+    }
+    window.addEventListener('hashchange',route)
+    route()
+
+    // Char count
+    const charText = document.getElementById('charText')
+    const charStats = document.getElementById('charStats')
+    function updateChar(){
+      const text = charText.value || ''
+      const chars = text.length
+      const words = text.trim().length ? text.trim().split(/\s+/).length : 0
+      const minutes = Math.ceil(words / 200)
+      charStats.textContent = `Слова ${words}. Символы ${chars}. Примерное время чтения ${minutes} минут.`
+    }
+    charText.addEventListener('input',updateChar)
+    document.getElementById('copyChar').addEventListener('click', async ()=>{
+      try{ await navigator.clipboard.writeText(charText.value); alert('Скопировано') }catch(e){ alert('Ошибка копирования') }
+    })
+
+    // Password
+    function generatePassword(len, opts){
+      const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      const lower = 'abcdefghijklmnopqrstuvwxyz'
+      const nums = '0123456789'
+      const syms = '!@#$%^&*()_+=[]{};:,.<>?'
+      let chars = ''
+      if(opts.upper) chars += upper
+      if(opts.lower) chars += lower
+      if(opts.numbers) chars += nums
+      if(opts.symbols) chars += syms
+      if(!chars) return ''
+      let out = ''
+      for(let i=0;i<len;i++) out += chars.charAt(Math.floor(Math.random()*chars.length))
+      return out
+    }
+    document.getElementById('genPw').addEventListener('click', ()=>{
+      const len = parseInt(document.getElementById('pwLen').value,10) || 12
+      const opts = {upper:document.getElementById('pwUpper').checked, lower:document.getElementById('pwLower').checked, numbers:document.getElementById('pwNumbers').checked, symbols:document.getElementById('pwSymbols').checked}
+      const val = document.getElementById('pwPreset').value
+      let out = ''
+      if(val === 'strong') out = generatePassword(Math.max(16,len), {upper:true,lower:true,numbers:true,symbols:true})
+      else if(val === 'memorable') out = generatePassword(Math.max(12,len), {upper:false,lower:true,numbers:false,symbols:false})
+      else out = generatePassword(len,opts)
+      document.getElementById('pwOut').value = out
+    })
+
+    // Percent
+    document.getElementById('calcPercent').addEventListener('click', ()=>{
+      const value = parseFloat(document.getElementById('percentValue').value) || 0
+      const p = parseFloat(document.getElementById('percentPercent').value) || 0
+      const part = value * p / 100
+      const total = value + part
+      document.getElementById('percentResult').textContent = `Процент от суммы ${part.toFixed(2)}. Сумма с добавлением ${total.toFixed(2)}`
+    })
+
+    // VAT
+    document.getElementById('calcVat').addEventListener('click', ()=>{
+      const amt = parseFloat(document.getElementById('vatAmount').value) || 0
+      const rate = parseFloat(document.getElementById('vatRate').value) || 0
+      const vat = amt * rate / 100
+      const incl = amt + vat
+      document.getElementById('vatResult').textContent = `НДС ${vat.toFixed(2)}. Сумма включая НДС ${incl.toFixed(2)}`
+    })
+
+    // Base64
+    const b64Text = document.getElementById('b64Text')
+    document.getElementById('encodeB64').addEventListener('click', ()=>{
+      try{ const s = btoa(unescape(encodeURIComponent(b64Text.value||''))) ; b64Text.value = s }catch(e){alert('Не удалось закодировать')}
+    })
+    document.getElementById('decodeB64').addEventListener('click', ()=>{
+      try{ const s = decodeURIComponent(escape(atob(b64Text.value||''))) ; b64Text.value = s }catch(e){alert('Не удалось декодировать')}
+    })
+    document.getElementById('copyB64').addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(b64Text.value); alert('Скопировано') }catch(e){alert('Ошибка копирования')} })
+
+    // QR generator via Google Chart API
+    const qrPreview = document.getElementById('qrPreview')
+    document.getElementById('genQr').addEventListener('click', ()=>{
+      const txt = document.getElementById('qrText').value||''
+      const size = parseInt(document.getElementById('qrSize').value,10) || 200
+      if(!txt){ alert('Введите текст или URL') ; return }
+      const url = 'https://chart.googleapis.com/chart?cht=qr&chs=' + size + 'x' + size + '&chl=' + encodeURIComponent(txt)
+      qrPreview.src = url
+    })
+    document.getElementById('downloadQr').addEventListener('click', ()=>{
+      if(!qrPreview.src){ alert('Сначала сгенерируйте QR') ; return }
+      const a = document.createElement('a'); a.href = qrPreview.src; a.download = 'qr.png'; a.click()
+    })
+
+    // Timer and stopwatch simple
+    let timerInterval = null
+    let timerRemaining = 0
+    function formatTime(sec){ const m = Math.floor(sec/60); const s = sec % 60; return String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0') }
+    document.getElementById('startTimer').addEventListener('click', ()=>{
+      const seconds = parseInt(document.getElementById('timerInput').value,10) || 0
+      if(seconds <= 0){ alert('Введите число секунд') ; return }
+      clearInterval(timerInterval)
+      timerRemaining = seconds
+      document.getElementById('timerDisplay').textContent = formatTime(timerRemaining)
+      timerInterval = setInterval(()=>{
+        timerRemaining--
+        document.getElementById('timerDisplay').textContent = formatTime(timerRemaining)
+        if(timerRemaining <= 0){ clearInterval(timerInterval); alert('Таймер закончился') }
+      },1000)
+    })
+    document.getElementById('stopTimer').addEventListener('click', ()=>{ clearInterval(timerInterval) })
+    document.getElementById('resetTimer').addEventListener('click', ()=>{ clearInterval(timerInterval); timerRemaining = 0; document.getElementById('timerDisplay').textContent = '00:00' })
+
+    // Color converter
+    function hexToRgb(hex){ hex = hex.replace('#',''); if(hex.length === 3) hex = hex.split('').map(s => s+s).join(''); const num = parseInt(hex,16); return [(num>>16)&255, (num>>8)&255, num&255] }
+    function rgbToHex(r,g,b){ return '#' + [r,g,b].map(x => Number(x).toString(16).padStart(2,'0')).join('') }
+    document.getElementById('hexToRgb').addEventListener('click', ()=>{
+      const h = (document.getElementById('hexInput').value||'').trim()
+      const r = (document.getElementById('rgbInput').value||'').trim()
+      if(h){ try{ const [rr,gg,bb] = hexToRgb(h); document.getElementById('colorResult').textContent = `rgb(${rr}, ${gg}, ${bb})` }catch(e){ document.getElementById('colorResult').textContent = 'Неверный hex' } }
+      else if(r){ try{ const parts = r.replace('rgb','').replace('(','').replace(')','').split(',').map(x=>x.trim()); const hex = rgbToHex(parts[0],parts[1],parts[2]); document.getElementById('colorResult').textContent = hex }catch(e){ document.getElementById('colorResult').textContent = 'Неверный rgb' } }
+      else{ document.getElementById('colorResult').textContent = 'Введите hex или rgb' }
+    })
+
+    // Init default
+    updateChar()
+
+  </script>
+
+  <!--
+  ДАЛЕЕ ПО ДОПОЛНИТЕЛЬНОЙ НАСТРОЙКЕ САЙТА
+
+  SEO и структура для поиска
+  1) Для хорошего SEO создайте отдельные статические страницы под каждый инструмент. Названия страниц должны содержать ключевые запросы, например /schetchik-slov.html или /generator-paroley.html
+  2) На каждую страницу добавляйте 150 300 слов уникального описания с ключами и примером использования
+  3) Сгенерируйте sitemap.xml и отправьте в Google Search Console и Яндекс.Вебмастер
+  4) Настройте Open Graph метатеги и структурированные данные JSON LD для сайта и разделов
+
+  Монетизация и реклама
+  1) Подключите Google AdSense или региональные сети. Для теста оставьте 1 баннер вверху страницы и 1 внизу контента
+  2) Не добавляйте навязчивые попапы. Лучше A B тестировать позиции рекламных блоков
+  3) Рассмотрите нативные офферы CPA в тематике безопасности, VPN, оптимизации
+
+  Хостинг
+  1) Быстро развернуть можно на GitHub Pages. Сохраните index.html в корень ветки main и включите Pages
+  2) Для HTTPS используйте Netlify или Vercel. Просто загрузите репозиторий
+  3) Для высокой нагрузки используйте CDN и кеширование статики
+
+  Безопасность и конфиденциальность
+  1) Если добавите загрузку файлов, обрабатывайте их на сервере с ограничениями по размеру и проверкой типа
+  2) Везде ставьте заголовки CSP и защиту от clickjacking
+
+  План на 30 дней
+  День 1 7
+  Сохранить файл как index.html и запустить локально
+  Подобрать домен и зарегистрировать
+  День 8 14
+  Создать отдельные статические страницы для 10 самых частых запросов и заполнить их уникальным текстом
+  Настроить sitemap и robots
+  День 15 21
+  Подключить аналитику GA4 и установить цели и события для отслеживания кликов рекламы и генераций
+  Подать сайт в поисковые консоли
+  День 22 30
+  Подключить AdSense после достижения требований
+  Запустить рекламные тесты и оптимизацию
+
+  Если нужно, могу создать zip архивацию проекта и подготовить команду файлов для деплоя в репозиторий
+  -->
+
+</body>
+</html>
