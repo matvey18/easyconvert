@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://easytools.ru/sitemap.xml
-Host: easytools.ru
+Sitemap: https://easyconvert.ru/sitemap.xml
+Host: easyconvert.ru
