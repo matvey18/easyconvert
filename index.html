@@ -3,8 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Primary meta tags for EasyTools on easyconvert.ru -->
   <title>EasyTools — быстрые онлайн утилиты: генератор паролей, QR, счётчик слов</title>
-  <meta name="description" content="EasyTools — набор простых и быстрых онлайн инструментов. Генератор паролей, счётчик слов, конвертеры и QR генератор. Работает прямо в браузере без регистрации.">
+  <meta name="description" content="EasyTools — набор простых и быстрых онлайн инструментов. Генератор паролей, счётчик слов, калькуляторы и QR. Работает в браузере без регистрации.">
   <link rel="canonical" href="https://easyconvert.ru/">
   <meta property="og:title" content="EasyTools — быстрые онлайн утилиты">
   <meta property="og:description" content="Набор онлайн инструментов: генератор паролей, QR, счётчик слов и другие. Быстро, удобно, бесплатно.">
@@ -12,6 +14,9 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
 
+  <meta name="robots" content="index,follow">
+
+  <meta name="theme-color" content="#1f2937">
 
   <style>
     :root{--bg:#f7f7fb;--card:#ffffff;--accent:#2563eb;--muted:#6b7280}
@@ -43,13 +48,34 @@
   </style>
 </head>
 <body>
+
+  <!-- Yandex Metrica Insert your ID in the placeholder BELOW -->
+  <!-- Replace YOUR_METRIKA_ID with real numeric ID from metrika.yandex.ru -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){ m[i]=m[i]||function(){ (m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();
+    k=e.createElement(t), a=e.getElementsByTagName(t)[0], k.async=1, k.src=r, a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(YOUR_METRIKA_ID, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/YOUR_METRIKA_ID" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+  <!-- Google Analytics 4 Insert measurement id in G_MEASUREMENT_ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G_MEASUREMENT_ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G_MEASUREMENT_ID');
+  </script>
+
   <header>
     <div class="wrap">
       <div class="brand">
         <div class="logo">ET</div>
         <div>
           <h1>EasyTools</h1>
-          <p class="lead">Набор быстрых онлайн инструментов. Работает прямо в браузере без регистрации</p>
+          <p class="lead">Набор быстрых онлайн утилит. Работает прямо в браузере без регистрации</p>
         </div>
       </div>
     </div>
@@ -58,7 +84,7 @@
   <div class="wrap">
     <div class="grid">
       <nav class="card" id="menu">
-        <a href="#char" data-tool="char">Счетчик символов и слов</a>
+        <a href="#char" data-tool="char">Счётчик символов и слов</a>
         <a href="#password" data-tool="password">Генератор паролей</a>
         <a href="#percent" data-tool="percent">Калькулятор процентов</a>
         <a href="#vat" data-tool="vat">Калькулятор НДС</a>
@@ -71,7 +97,7 @@
       <main class="card" id="content">
 
         <section id="char" class="tool">
-          <h2>Счетчик символов и слов</h2>
+          <h2>Счётчик символов и слов</h2>
           <p class="muted">Вставьте текст ниже. Счётчик обновляется при вводе.</p>
           <textarea id="charText" rows="8" placeholder="Вставьте текст"></textarea>
           <div class="card-inline small" id="charStats">Слова 0. Символы 0. Примерное время чтения 0 минут.</div>
@@ -80,7 +106,7 @@
           </div>
           <article style="margin-top:12px;color:var(--muted)">
             <h3>Описание</h3>
-            <p>Этот инструмент полезен для быстрых подсчётов длины текста при подготовке постов, заголовков или метаописаний. Для лучшей индексации создавайте отдельные страницы с ключевыми фразами вида «счётчик слов онлайн» и добавляйте 150 300 слов объяснения для SEO.</p>
+            <p>Этот инструмент полезен для быстрых подсчётов длины текста при подготовке постов, заголовков или метаописаний.</p>
           </article>
         </section>
 
@@ -100,7 +126,7 @@
             <input id="pwOut" readonly>
             <button class="btn" id="genPw">Сгенерировать</button>
           </div>
-          <div style="margin-top:10px;color:var(--muted)">Используйте длинные уникальные пароли для безопасности. Генератор работает локально и никому ничего не отправляет.</div>
+          <div style="margin-top:10px;color:var(--muted)">Используйте длинные уникальные пароли для безопасности.</div>
         </section>
 
         <section id="percent" class="tool">
@@ -113,10 +139,6 @@
             <button class="btn" id="calcPercent">Посчитать</button>
             <div id="percentResult" style="margin-top:8px" class="muted"></div>
           </div>
-          <article style="margin-top:12px;color:var(--muted)">
-            <h3>Описание</h3>
-            <p>Быстрый калькулятор процентов для скидок, прироста и налогов. Страницы с такими инструментами хорошо конвертируются в трафик через поисковые запросы вида «сколько будет 15 процентов от 2500».</p>
-          </article>
         </section>
 
         <section id="vat" class="tool">
@@ -139,7 +161,6 @@
             <button class="btn" id="decodeB64">Декодировать</button>
             <button class="btn" id="copyB64">Копировать</button>
           </div>
-          <div style="margin-top:8px;color:var(--muted)">Полезно для быстрой проверки Base64 и работы с небольшими строками. Для больших файлов используйте специализированные инструменты.</div>
         </section>
 
         <section id="qr" class="tool">
@@ -153,7 +174,6 @@
           <div style="margin-top:12px">
             <img id="qrPreview" alt="qr preview" style="border:1px solid #e6e9ef;border-radius:8px">
           </div>
-          <div style="margin-top:10px;color:var(--muted)">QR создаётся через Chart API. Если нужен оффлайн генератор, замените на qrcodejs или аналог.</div>
         </section>
 
         <section id="timer" class="tool">
@@ -165,7 +185,6 @@
             <button class="btn" id="resetTimer">Сброс</button>
           </div>
           <div style="margin-top:12px;font-size:22px" id="timerDisplay">00:00</div>
-          <div style="margin-top:12px;color:var(--muted)">Простой таймер и секундомер для задач и напоминаний.</div>
         </section>
 
         <section id="color" class="tool">
@@ -184,8 +203,8 @@
     </div>
 
     <footer>
-      <div>EasyTools. Это быстрый и удобный генератор а главное безплатный .</div>
-      <div style="margin-top:6px">Мы работаем над расширением возможностей и функционала данного сайта</div>
+      <div>EasyTools. Набор быстрых онлайн утилит на easyconvert.ru</div>
+      <div style="margin-top:6px">Если нужно, можно расширить набор утилит и подготовить отдельные статические страницы для SEO.</div>
     </footer>
 
   </div>
@@ -329,6 +348,5 @@
     updateChar()
 
   </script>
-
 </body>
 </html>
