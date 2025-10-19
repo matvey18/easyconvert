@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Генератор паролей онлайн — EasyTools</title>
+  <meta name="description" content="Создавайте сильные пароли онлайн. Настройте длину и набор символов. Работа полностью в браузере.">
+  <link rel="canonical" href="https://easyconvert.ru/generator_paroley.html">
+  <meta property="og:title" content="Генератор паролей — EasyTools">
+  <meta property="og:description" content="Генератор уникальных и безопасных паролей прямо в браузере.">
+  <meta property="og:url" content="https://easyconvert.ru/generator_paroley.html">
+  <meta name="robots" content="index,follow">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"Генератор паролей","url":"https://easyconvert.ru/generator_paroley.html","description":"Генератор паролей онлайн. Длина пароля и набор символов настраиваются."}
+  </script>
+  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+</head>
+<body>
+  <a href="/">Главная</a>
+  <h1>Генератор паролей</h1>
+
+  <div>
+    <label>Длина <input id="len" type="number" value="16" min="4" max="64" style="width:80px"></label>
+    <label><input id="u" type="checkbox" checked> Заглавные</label>
+    <label><input id="l" type="checkbox" checked> Строчные</label>
+    <label><input id="n" type="checkbox" checked> Цифры</label>
+    <label><input id="s" type="checkbox"> Символы</label>
+    <button id="gen">Сгенерировать</button>
+  </div>
+
+  <input id="out" style="width:100%;margin-top:10px" readonly>
+
+  <script>
+    function gen(len,opts){
+      const upper='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const lower='abcdefghijklmnopqrstuvwxyz';
+      const nums='0123456789';
+      const sy='!@#$%&*()_+=[]{};:,.<>?';
+      let pool='';
+      if(opts.u)pool+=upper;
+      if(opts.l)pool+=lower;
+      if(opts.n)pool+=nums;
+      if(opts.s)pool+=sy;
+      if(!pool) return '';
+      let r='';
+      for(let i=0;i<len;i++) r+=pool.charAt(Math.floor(Math.random()*pool.length));
+      return r;
+    }
+    document.getElementById('gen').addEventListener('click',()=>{
+      const len=Number(document.getElementById('len').value)||16;
+      const opts={u:document.getElementById('u').checked,l:document.getElementById('l').checked,n:document.getElementById('n').checked,s:document.getElementById('s').checked};
+      document.getElementById('out').value=gen(len,opts);
+    });
+  </script>
+</body>
+</html>
