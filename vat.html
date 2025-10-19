@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Калькулятор НДС — EasyTools</title>
+  <meta name="description" content="Рассчитать НДС по ставке. Удобно для быстрых проверок.">
+  <link rel="canonical" href="https://easyconvert.ru/vat.html">
+  <meta property="og:title" content="Калькулятор НДС — EasyTools">
+  <meta property="og:description" content="Быстрый расчёт НДС и суммы с учётом НДС.">
+  <meta property="og:url" content="https://easyconvert.ru/vat.html">
+  <meta name="robots" content="index,follow">
+  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+</head>
+<body>
+  <a href="/">Главная</a>
+  <h1>Калькулятор НДС</h1>
+  <p>Описание калькулятора НДС содержит разъяснение как высчитывается налог в двух направлениях включить НДС в цену и выделить НДС из общей суммы. Объясняем разницу между ставками и даём простой пример расчёта при ставке 20 процентов для понятия логики. Поясняем частые ошибки например путаницу с десятичными знаками и с порядком действий при включении и исключении налога. Есть раздел с практическими подсказками для предпринимателей как быстро проверить суммы по чеку и как использовать инструмент при подготовке первичных бухгалтерских документов. Также отмечаем что калькулятор даёт ориентировочные значения и при официальной отчётности рекомендуется сверяться со специализированными программами или бухгалтером.</p>
+  <input id="a" type="number" placeholder="Сумма" style="width:45%">
+  <input id="r" type="number" placeholder="Ставка %" value="20" style="width:45%">
+  <button id="calc">Посчитать</button>
+  <div id="out" style="margin-top:8px"></div>
+  <script>
+    document.getElementById('calc').addEventListener('click',()=>{
+      const a=Number(document.getElementById('a').value)||0;
+      const rate=Number(document.getElementById('r').value)||0;
+      const vat=a*rate/100;
+      const incl=a+vat;
+      document.getElementById('out').textContent=`НДС ${vat.toFixed(2)}. Сумма с НДС ${incl.toFixed(2)}.`;
+    });
+  </script>
+</body>
+</html>
