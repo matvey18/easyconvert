@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Генератор QR кодов — EasyTools</title>
+  <meta name="description" content="Генератор QR кодов для ссылок и текста. Скачивайте картинку в один клик.">
+  <link rel="canonical" href="https://easyconvert.ru/qr.html">
+  <meta property="og:title" content="Генератор QR кодов — EasyTools">
+  <meta property="og:description" content="Создавайте QR коды быстро и бесплатно.">
+  <meta property="og:url" content="https://easyconvert.ru/qr.html">
+  <meta name="robots" content="index,follow">
+  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+</head>
+<body>
+  <a href="/">Главная</a>
+  <h1>Генератор QR кодов</h1>
+
+  <input id="data" placeholder="Введите текст или URL" style="width:70%">
+  <input id="size" type="number" value="200" min="100" max="1000" style="width:90px">
+  <button id="gen">Сгенерировать</button>
+  <button id="dl">Скачать</button>
+
+  <div style="margin-top:12px">
+    <img id="img" alt="QR" style="border:1px solid #e6e9ef">
+  </div>
+
+  <script>
+    const gen=document.getElementById('gen');
+    const dl=document.getElementById('dl');
+    const img=document.getElementById('img');
+    gen.addEventListener('click',()=>{
+      const text=document.getElementById('data').value||'';
+      const s=Number(document.getElementById('size').value)||200;
+      if(!text){ alert('Введите текст или URL'); return; }
+      const url='https://api.qrserver.com/v1/create-qr-code/?size=' + s + 'x' + s + '&data=' + encodeURIComponent(text);
+      img.src=url;
+      img.width=s;
+      img.height=s;
+    });
+    dl.addEventListener('click',()=>{
+      if(!img.src){ alert('Сначала сгенерируйте QR'); return; }
+      const a=document.createElement('a');
+      a.href=img.src;
+      a.download='qr.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  </script>
+</body>
+</html>
