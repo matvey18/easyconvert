@@ -1,40 +1,35 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Счётчик слов онлайн — EasyTools</title>
-  <meta name="description" content="Быстрый онлайн счётчик слов и символов. Вставьте текст и узнайте количество слов, символов и примерное время чтения.">
-  <link rel="canonical" href="https://easyconvert.ru/schetchik_slov.html">
-  <meta property="og:title" content="Счётчик слов онлайн — EasyTools">
-  <meta property="og:description" content="Узнайте количество слов и символов за секунды. Удобно для постов и метаописаний.">
-  <meta property="og:url" content="https://easyconvert.ru/schetchik_slov.html">
-  <meta name="robots" content="index,follow">
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebPage","name":"Счётчик слов онлайн","url":"https://easyconvert.ru/schetchik_slov.html","description":"Онлайн счётчик слов и символов. Быстро и бесплатно."}
-  </script>
-  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Счётчик слов онлайн — EasyTools</title>
+<meta name="description" content="Быстрый онлайн счётчик слов и символов. Вставьте текст и узнайте количество слов, символов и примерное время чтения.">
+<link rel="canonical" href="https://easyconvert.ru/schetchik_slov.html">
+<meta property="og:title" content="Счётчик слов онлайн — EasyTools">
+<meta property="og:description" content="Узнайте количество слов и символов за секунды. Удобно для постов и метаописаний.">
+<meta property="og:url" content="https://easyconvert.ru/schetchik_slov.html">
+<meta name="robots" content="index,follow">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Счётчик слов онлайн","url":"https://easyconvert.ru/schetchik_slov.html","description":"Онлайн счётчик слов и символов. Быстро и бесплатно."}</script>
+<style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
 </head>
 <body>
-  <a href="/">Главная</a>
-  <h1>Счётчик слов онлайн</h1>
-  <p>Вставьте текст в поле ниже. Счётчик покажет количество слов, символов и примерное время чтения. Это удобно для подготовки постов и метаописаний.</p>
+<a href="/">Главная</a>
+<h1>Счётчик слов онлайн</h1>
+<p>Этот счётчик слов создан чтобы быстро решить практическую задачу автора, редактора или маркетолога. Вставьте текст в поле и вы моментально получите точные метрики: количество слов, количество символов, а также примерное время чтения, которое удобно учитывать при планировании публикаций. Кроме базовых цифр инструмент показывает, как длина текста соотносится с рекомендованными значениями для заголовков, постов в соцсетях и описаний к страницам. Частая проблема при подсчёте — это лишние пробелы, невидимые символы и HTML‑теги, которые искажают результаты. Чтобы получить корректный подсчёт, очистите текст от служебных символов или используйте наш инструмент параллельно с функцией удаления HTML. Для блогеров и менеджеров по контенту это экономит время и повышает качество материалов.</p>
 
-  <textarea id="t" rows="8" style="width:100%"></textarea>
-  <div id="res" style="margin-top:8px;color:#333">Слова 0. Символы 0. Время чтения 0 минут.</div>
 
-  <script>
-    const t=document.getElementById('t');
-    const r=document.getElementById('res');
-    function upd(){
-      const s=t.value.trim();
-      const chars=s.length;
-      const words=s? s.split(/\s+/).length:0;
-      const min=Math.ceil(words/200);
-      r.textContent=`Слова ${words}. Символы ${chars}. Время чтения ${min} минут.`;
-    }
-    t.addEventListener('input',upd);
-    upd();
-  </script>
+<p>Ниже приведены практические примеры: если вы готовите заголовок для статьи, держите его в пределах 6–12 слов; для поста в социальных сетях оптимально 40–80 слов, а для полноценной статьи ориентируйтесь на 800–1500 слов в зависимости от темы. Также мы рекомендуем проверять время чтения: если ваш текст рассчитан на формат быстрого прочтения, цель — 1–3 минуты, для более глубоких материалов — 5–10 минут и более. Инструмент работает локально в браузере, данные не отправляются на сервер, можно безопасно использовать текст с конфиденциальной информацией.</p>
+
+
+<textarea id="t" rows="8" style="width:100%"></textarea>
+<div id="res" style="margin-top:8px;color:#333">Слова 0. Символы 0. Время чтения 0 минут.</div>
+
+
+<script>
+const t=document.getElementById('t'); const r=document.getElementById('res');
+function upd(){ const s=t.value.trim(); const chars=s.length; const words=s? s.split(/\s+/).length:0; const min=Math.ceil(words/200); r.textContent=`Слова ${words}. Символы ${chars}. Время чтения ${min} минут.`; }
+t.addEventListener('input',upd); upd();
+</script>
 </body>
 </html>
