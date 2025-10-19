@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Таймер и секундомер — EasyTools</title>
+  <meta name="description" content="Простой таймер и секундомер онлайн.">
+  <link rel="canonical" href="https://easyconvert.ru/timer.html">
+  <meta name="robots" content="index,follow">
+  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+</head>
+<body>
+  <a href="/">Главная</a>
+  <h1>Таймер</h1>
+  <p>Таймер EasyTools это простой инструмент для концентрации и для управления временем при задачах по методу помодоро или при тренировках. В тексте рассказано как быстро задать интервал для работы или для отдыха и как использовать таймер в повседневных сценариях например при подготовке презентаций или домашних делах. Приводим практические рекомендации как сочетать таймер с короткими заметками и сессиями высокой концентрации для повышения продуктивности. Есть примеры настройки периодов работы и отдыха и советы по использованию звукового сигнала чтобы не пропустить окончание сессии. Также объясняем что таймер работает полностью в браузере и не требует регистраций что удобно для быстрого старта.</p>
+  <input id="sec" type="number" placeholder="Секунд" style="width:120px">
+  <button id="start">Старт</button>
+  <button id="stop">Стоп</button>
+  <button id="reset">Сброс</button>
+  <div id="disp" style="font-size:22px;margin-top:10px">00:00</div>
+  <script>
+    let iv=null, rem=0;
+    function f(t){const m=Math.floor(t/60);const s=t%60;return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');}
+    document.getElementById('start').addEventListener('click',()=>{
+      const s=Number(document.getElementById('sec').value)||0;
+      if(s<=0) return alert('Введите секунды');
+      clearInterval(iv);
+      rem=s;
+      document.getElementById('disp').textContent=f(rem);
+      iv=setInterval(()=>{rem--;document.getElementById('disp').textContent=f(rem); if(rem<=0){clearInterval(iv);alert('Таймер завершён');}},1000);
+    });
+    document.getElementById('stop').addEventListener('click',()=>clearInterval(iv));
+    document.getElementById('reset').addEventListener('click',()=>{clearInterval(iv);rem=0;document.getElementById('disp').textContent='00:00'});
+  </script>
+</body>
+</html>
