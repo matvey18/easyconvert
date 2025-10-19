@@ -3,350 +3,67 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <!-- Primary meta tags for EasyTools on easyconvert.ru -->
-  <title>EasyTools — быстрые онлайн утилиты: генератор паролей, QR, счётчик слов</title>
-  <meta name="description" content="EasyTools — набор простых и быстрых онлайн инструментов. Генератор паролей, счётчик слов, калькуляторы и QR. Работает в браузере без регистрации.">
+  <title>EasyTools — набор быстрых онлайн утилит</title>
+  <meta name="description" content="EasyTools на easyconvert.ru. Генератор паролей, счётчик слов, конвертеры, QR генератор и другие утилиты. Работает в браузере без регистрации.">
   <link rel="canonical" href="https://easyconvert.ru/">
-  <meta property="og:title" content="EasyTools — быстрые онлайн утилиты">
-  <meta property="og:description" content="Набор онлайн инструментов: генератор паролей, QR, счётчик слов и другие. Быстро, удобно, бесплатно.">
+  <meta property="og:title" content="EasyTools — набор быстрых онлайн утилит">
+  <meta property="og:description" content="Генератор паролей, счётчик слов, QR генератор и другие онлайн утилиты на easyconvert.ru">
   <meta property="og:url" content="https://easyconvert.ru/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
-
   <meta name="robots" content="index,follow">
 
-  <meta name="theme-color" content="#1f2937">
-
   <style>
-    :root{--bg:#f7f7fb;--card:#ffffff;--accent:#2563eb;--muted:#6b7280}
-    *{box-sizing:border-box}
-    body{font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:var(--bg);color:#111}
-    header{background:linear-gradient(90deg,rgba(37,99,235,0.05),transparent);padding:20px 16px}
-    .wrap{max-width:1100px;margin:18px auto;padding:0 16px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
-    h1{font-size:20px;margin:0}
-    p.lead{margin:6px 0 0;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:260px 1fr;gap:18px;margin-top:18px}
-    nav.card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-    nav a{display:block;padding:10px;border-radius:8px;color:#111;text-decoration:none;margin-bottom:6px}
-    nav a.active{background:linear-gradient(90deg,rgba(37,99,235,0.06),transparent);font-weight:600}
-    main.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-    .tool{display:none}
-    .tool.active{display:block}
-    .tool h2{margin-top:0}
-    textarea,input,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:14px}
-    .row{display:flex;gap:10px}
-    .row > *{flex:1}
-    .btn{display:inline-block;padding:8px 12px;border-radius:10px;background:var(--accent);color:white;border:none;cursor:pointer}
-    .muted{color:var(--muted);font-size:13px}
-    .small{font-size:13px}
-    .card-inline{padding:12px;border-radius:8px;background:#f1f5f9;margin-top:10px}
-    footer{margin:30px 0;text-align:center;color:var(--muted);font-size:13px}
-    @media(max-width:880px){.grid{grid-template-columns:1fr;}.logo{width:40px;height:40px}}
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:18px;background:#f7f7fb;color:#111}
+    a{color:#2563eb}
+    .wrap{max-width:1000px;margin:0 auto}
+    header{display:flex;align-items:center;gap:14px}
+    .logo{width:48px;height:48px;background:#2563eb;border-radius:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+    nav{margin-top:18px}
+    nav a{display:inline-block;margin-right:10px;padding:8px 10px;background:#fff;border-radius:8px;text-decoration:none;color:#111;border:1px solid #e6e9ef}
   </style>
 </head>
 <body>
-
-  <!-- Yandex Metrica Insert your ID in the placeholder BELOW -->
-  <!-- Replace YOUR_METRIKA_ID with real numeric ID from metrika.yandex.ru -->
-  <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){ m[i]=m[i]||function(){ (m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();
-    k=e.createElement(t), a=e.getElementsByTagName(t)[0], k.async=1, k.src=r, a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-    ym(YOUR_METRIKA_ID, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true });
-  </script>
-  <noscript><div><img src="https://mc.yandex.ru/watch/YOUR_METRIKA_ID" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-
-  <!-- Google Analytics 4 Insert measurement id in G_MEASUREMENT_ID -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G_MEASUREMENT_ID"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} 
-    gtag('js', new Date());
-    gtag('config', 'G_MEASUREMENT_ID');
-  </script>
-
-  <header>
-    <div class="wrap">
-      <div class="brand">
-        <div class="logo">ET</div>
-        <div>
-          <h1>EasyTools</h1>
-          <p class="lead">Набор быстрых онлайн утилит. Работает прямо в браузере без регистрации</p>
-        </div>
-      </div>
-    </div>
-  </header>
-
   <div class="wrap">
-    <div class="grid">
-      <nav class="card" id="menu">
-        <a href="#char" data-tool="char">Счётчик символов и слов</a>
-        <a href="#password" data-tool="password">Генератор паролей</a>
-        <a href="#percent" data-tool="percent">Калькулятор процентов</a>
-        <a href="#vat" data-tool="vat">Калькулятор НДС</a>
-        <a href="#base64" data-tool="base64">Base64 кодирование</a>
-        <a href="#qr" data-tool="qr">Генератор QR</a>
-        <a href="#timer" data-tool="timer">Таймер и секундомер</a>
-        <a href="#color" data-tool="color">Hex RGB конвертер</a>
-      </nav>
+    <header>
+      <div class="logo">ET</div>
+      <div>
+        <h1>EasyTools</h1>
+        <div>Набор быстрых онлайн утилит. Работает прямо в браузере.</div>
+      </div>
+    </header>
 
-      <main class="card" id="content">
+    <nav>
+      <a href="/schetchik_slov.html">Счётчик слов</a>
+      <a href="/generator_paroley.html">Генератор паролей</a>
+      <a href="/base64.html">Base64</a>
+      <a href="/qr.html">Генератор QR</a>
+      <a href="/percent.html">Калькулятор процентов</a>
+      <a href="/vat.html">Калькулятор НДС</a>
+      <a href="/timer.html">Таймер</a>
+      <a href="/color.html">Hex RGB</a>
+    </nav>
 
-        <section id="char" class="tool">
-          <h2>Счётчик символов и слов</h2>
-          <p class="muted">Вставьте текст ниже. Счётчик обновляется при вводе.</p>
-          <textarea id="charText" rows="8" placeholder="Вставьте текст"></textarea>
-          <div class="card-inline small" id="charStats">Слова 0. Символы 0. Примерное время чтения 0 минут.</div>
-          <div style="margin-top:8px">
-            <button class="btn" id="copyChar">Копировать текст</button>
-          </div>
-          <article style="margin-top:12px;color:var(--muted)">
-            <h3>Описание</h3>
-            <p>Этот инструмент полезен для быстрых подсчётов длины текста при подготовке постов, заголовков или метаописаний.</p>
-          </article>
-        </section>
+    <main>
+      <h2>Почему EasyTools</h2>
+      <p>Набор простых утилит которые нужны ежедневно: от генерации паролей до создания QR кода. Все инструменты работают локально и быстро.</p>
 
-        <section id="password" class="tool">
-          <h2>Генератор паролей</h2>
-          <div class="row" style="margin-bottom:8px">
-            <input type="number" id="pwLen" min="4" max="64" value="16">
-            <select id="pwPreset"><option value="custom">Пользовательский</option><option value="strong">Сильный</option><option value="memorable">Легко запомнить</option></select>
-          </div>
-          <div style="margin-bottom:8px">
-            <label class="small"><input type="checkbox" id="pwUpper" checked> Заглавные</label>
-            &nbsp; <label class="small"><input type="checkbox" id="pwLower" checked> Строчные</label>
-            &nbsp; <label class="small"><input type="checkbox" id="pwNumbers" checked> Цифры</label>
-            &nbsp; <label class="small"><input type="checkbox" id="pwSymbols"> Символы</label>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <input id="pwOut" readonly>
-            <button class="btn" id="genPw">Сгенерировать</button>
-          </div>
-          <div style="margin-top:10px;color:var(--muted)">Используйте длинные уникальные пароли для безопасности.</div>
-        </section>
+      <h3>Быстрый старт</h3>
+      <p>Открой страницу любого инструмента и пользуйся без регистрации. Добавляй сайт в закладки и делись ссылкой.</p>
 
-        <section id="percent" class="tool">
-          <h2>Калькулятор процентов</h2>
-          <div class="row">
-            <input id="percentValue" placeholder="Сумма" type="number">
-            <input id="percentPercent" placeholder="Процент" type="number">
-          </div>
-          <div style="margin-top:8px">
-            <button class="btn" id="calcPercent">Посчитать</button>
-            <div id="percentResult" style="margin-top:8px" class="muted"></div>
-          </div>
-        </section>
+      <section style="margin-top:18px">
+        <h4>Популярные инструменты</h4>
+        <ul>
+          <li><a href="/schetchik_slov.html">Счётчик слов</a></li>
+          <li><a href="/generator_paroley.html">Генератор паролей</a></li>
+          <li><a href="/qr.html">Генератор QR</a></li>
+        </ul>
+      </section>
+    </main>
 
-        <section id="vat" class="tool">
-          <h2>Калькулятор НДС</h2>
-          <div class="row">
-            <input id="vatAmount" placeholder="Сумма" type="number">
-            <input id="vatRate" placeholder="Ставка, %" type="number" value="20">
-          </div>
-          <div style="margin-top:8px">
-            <button class="btn" id="calcVat">Посчитать</button>
-            <div id="vatResult" style="margin-top:8px" class="muted"></div>
-          </div>
-        </section>
-
-        <section id="base64" class="tool">
-          <h2>Base64 кодирование и декодирование</h2>
-          <textarea id="b64Text" rows="6" placeholder="Текст или Base64"></textarea>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button class="btn" id="encodeB64">Кодировать</button>
-            <button class="btn" id="decodeB64">Декодировать</button>
-            <button class="btn" id="copyB64">Копировать</button>
-          </div>
-        </section>
-
-        <section id="qr" class="tool">
-          <h2>Генератор QR кода</h2>
-          <input id="qrText" placeholder="Текст или URL для QR">
-          <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
-            <input id="qrSize" type="number" value="200" min="100" max="1000" style="width:110px">
-            <button class="btn" id="genQr">Сгенерировать</button>
-            <button class="btn" id="downloadQr">Скачать</button>
-          </div>
-          <div style="margin-top:12px">
-            <img id="qrPreview" alt="qr preview" style="border:1px solid #e6e9ef;border-radius:8px">
-          </div>
-        </section>
-
-        <section id="timer" class="tool">
-          <h2>Таймер и секундомер</h2>
-          <div style="display:flex;gap:8px;align-items:center">
-            <input id="timerInput" placeholder="Секунд" type="number">
-            <button class="btn" id="startTimer">Запустить таймер</button>
-            <button class="btn" id="stopTimer">Остановить</button>
-            <button class="btn" id="resetTimer">Сброс</button>
-          </div>
-          <div style="margin-top:12px;font-size:22px" id="timerDisplay">00:00</div>
-        </section>
-
-        <section id="color" class="tool">
-          <h2>Hex RGB конвертер</h2>
-          <div class="row">
-            <input id="hexInput" placeholder="#rrggbb или rrggbb">
-            <input id="rgbInput" placeholder="rgb(255,255,255)">
-          </div>
-          <div style="margin-top:8px">
-            <button class="btn" id="hexToRgb">Преобразовать</button>
-            <div id="colorResult" style="margin-top:8px;color:var(--muted)"></div>
-          </div>
-        </section>
-
-      </main>
-    </div>
-
-    <footer>
-      <div>EasyTools-Это быстрый и удобный генератор а главное безплатный </div>
-      <div style="margin-top:6px">Мы работаем над расширением возможностей и функционала данного сайта</div>
+    <footer style="margin-top:28px;color:#666">
+      <div>EasyTools на easyconvert.ru</div>
     </footer>
-
   </div>
-
-  <script>
-    // Простая маршрутизация по hash
-    const tools = Array.from(document.querySelectorAll('.tool'))
-    const menuLinks = Array.from(document.querySelectorAll('nav a'))
-    function showTool(slug){
-      tools.forEach(t => t.classList.remove('active'))
-      menuLinks.forEach(a => a.classList.remove('active'))
-      const el = document.getElementById(slug)
-      if(el) el.classList.add('active')
-      const link = menuLinks.find(a => a.dataset.tool === slug)
-      if(link) link.classList.add('active')
-      document.title = 'EasyTools | ' + (el ? el.querySelector('h2').innerText : 'Утилиты')
-    }
-    function route(){
-      const hash = location.hash.replace('#','') || 'char'
-      const slug = hash.split('/')[0]
-      showTool(slug)
-    }
-    window.addEventListener('hashchange',route)
-    route()
-
-    // Char count
-    const charText = document.getElementById('charText')
-    const charStats = document.getElementById('charStats')
-    function updateChar(){
-      const text = charText.value || ''
-      const chars = text.length
-      const words = text.trim().length ? text.trim().split(/\s+/).length : 0
-      const minutes = Math.ceil(words / 200)
-      charStats.textContent = `Слова ${words}. Символы ${chars}. Примерное время чтения ${minutes} минут.`
-    }
-    charText.addEventListener('input',updateChar)
-    document.getElementById('copyChar').addEventListener('click', async ()=>{
-      try{ await navigator.clipboard.writeText(charText.value); alert('Скопировано') }catch(e){ alert('Ошибка копирования') }
-    })
-
-    // Password
-    function generatePassword(len, opts){
-      const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-      const lower = 'abcdefghijklmnopqrstuvwxyz'
-      const nums = '0123456789'
-      const syms = '!@#$%^&*()_+=[]{};:,.<>?'
-      let chars = ''
-      if(opts.upper) chars += upper
-      if(opts.lower) chars += lower
-      if(opts.numbers) chars += nums
-      if(opts.symbols) chars += syms
-      if(!chars) return ''
-      let out = ''
-      for(let i=0;i<len;i++) out += chars.charAt(Math.floor(Math.random()*chars.length))
-      return out
-    }
-    document.getElementById('genPw').addEventListener('click', ()=>{
-      const len = parseInt(document.getElementById('pwLen').value,10) || 12
-      const opts = {upper:document.getElementById('pwUpper').checked, lower:document.getElementById('pwLower').checked, numbers:document.getElementById('pwNumbers').checked, symbols:document.getElementById('pwSymbols').checked}
-      const val = document.getElementById('pwPreset').value
-      let out = ''
-      if(val === 'strong') out = generatePassword(Math.max(16,len), {upper:true,lower:true,numbers:true,symbols:true})
-      else if(val === 'memorable') out = generatePassword(Math.max(12,len), {upper:false,lower:true,numbers:false,symbols:false})
-      else out = generatePassword(len,opts)
-      document.getElementById('pwOut').value = out
-    })
-
-    // Percent
-    document.getElementById('calcPercent').addEventListener('click', ()=>{
-      const value = parseFloat(document.getElementById('percentValue').value) || 0
-      const p = parseFloat(document.getElementById('percentPercent').value) || 0
-      const part = value * p / 100
-      const total = value + part
-      document.getElementById('percentResult').textContent = `Процент от суммы ${part.toFixed(2)}. Сумма с добавлением ${total.toFixed(2)}`
-    })
-
-    // VAT
-    document.getElementById('calcVat').addEventListener('click', ()=>{
-      const amt = parseFloat(document.getElementById('vatAmount').value) || 0
-      const rate = parseFloat(document.getElementById('vatRate').value) || 0
-      const vat = amt * rate / 100
-      const incl = amt + vat
-      document.getElementById('vatResult').textContent = `НДС ${vat.toFixed(2)}. Сумма включая НДС ${incl.toFixed(2)}`
-    })
-
-    // Base64
-    const b64Text = document.getElementById('b64Text')
-    document.getElementById('encodeB64').addEventListener('click', ()=>{
-      try{ const s = btoa(unescape(encodeURIComponent(b64Text.value||''))) ; b64Text.value = s }catch(e){alert('Не удалось закодировать')}
-    })
-    document.getElementById('decodeB64').addEventListener('click', ()=>{
-      try{ const s = decodeURIComponent(escape(atob(b64Text.value||''))) ; b64Text.value = s }catch(e){alert('Не удалось декодировать')}
-    })
-    document.getElementById('copyB64').addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(b64Text.value); alert('Скопировано') }catch(e){alert('Ошибка копирования')} })
-
-    // QR generator via Google Chart API
-    const qrPreview = document.getElementById('qrPreview')
-    document.getElementById('genQr').addEventListener('click', ()=>{
-      const txt = document.getElementById('qrText').value||''
-      const size = parseInt(document.getElementById('qrSize').value,10) || 200
-      if(!txt){ alert('Введите текст или URL') ; return }
-      const url = 'https://chart.googleapis.com/chart?cht=qr&chs=' + size + 'x' + size + '&chl=' + encodeURIComponent(txt)
-      qrPreview.src = url
-    })
-    document.getElementById('downloadQr').addEventListener('click', ()=>{
-      if(!qrPreview.src){ alert('Сначала сгенерируйте QR') ; return }
-      const a = document.createElement('a'); a.href = qrPreview.src; a.download = 'qr.png'; a.click()
-    })
-
-    // Timer and stopwatch simple
-    let timerInterval = null
-    let timerRemaining = 0
-    function formatTime(sec){ const m = Math.floor(sec/60); const s = sec % 60; return String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0') }
-    document.getElementById('startTimer').addEventListener('click', ()=>{
-      const seconds = parseInt(document.getElementById('timerInput').value,10) || 0
-      if(seconds <= 0){ alert('Введите число секунд') ; return }
-      clearInterval(timerInterval)
-      timerRemaining = seconds
-      document.getElementById('timerDisplay').textContent = formatTime(timerRemaining)
-      timerInterval = setInterval(()=>{
-        timerRemaining--
-        document.getElementById('timerDisplay').textContent = formatTime(timerRemaining)
-        if(timerRemaining <= 0){ clearInterval(timerInterval); alert('Таймер закончился') }
-      },1000)
-    })
-    document.getElementById('stopTimer').addEventListener('click', ()=>{ clearInterval(timerInterval) })
-    document.getElementById('resetTimer').addEventListener('click', ()=>{ clearInterval(timerInterval); timerRemaining = 0; document.getElementById('timerDisplay').textContent = '00:00' })
-
-    // Color converter
-    function hexToRgb(hex){ hex = hex.replace('#',''); if(hex.length === 3) hex = hex.split('').map(s => s+s).join(''); const num = parseInt(hex,16); return [(num>>16)&255, (num>>8)&255, num&255] }
-    function rgbToHex(r,g,b){ return '#' + [r,g,b].map(x => Number(x).toString(16).padStart(2,'0')).join('') }
-    document.getElementById('hexToRgb').addEventListener('click', ()=>{
-      const h = (document.getElementById('hexInput').value||'').trim()
-      const r = (document.getElementById('rgbInput').value||'').trim()
-      if(h){ try{ const [rr,gg,bb] = hexToRgb(h); document.getElementById('colorResult').textContent = `rgb(${rr}, ${gg}, ${bb})` }catch(e){ document.getElementById('colorResult').textContent = 'Неверный hex' } }
-      else if(r){ try{ const parts = r.replace('rgb','').replace('(','').replace(')','').split(',').map(x=>x.trim()); const hex = rgbToHex(parts[0],parts[1],parts[2]); document.getElementById('colorResult').textContent = hex }catch(e){ document.getElementById('colorResult').textContent = 'Неверный rgb' } }
-      else{ document.getElementById('colorResult').textContent = 'Введите hex или rgb' }
-    })
-
-    // Init default
-    updateChar()
-
-  </script>
 </body>
 </html>
