@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Калькулятор процентов — EasyTools</title>
+  <meta name="description" content="Калькулятор процентов онлайн. Рассчитать процент от суммы и итоговую сумму.">
+  <link rel="canonical" href="https://easyconvert.ru/percent.html">
+  <meta property="og:title" content="Калькулятор процентов — EasyTools">
+  <meta property="og:description" content="Удобный калькулятор процентов для скидок и прироста.">
+  <meta property="og:url" content="https://easyconvert.ru/percent.html">
+  <meta name="robots" content="index,follow">
+  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+</head>
+<body>
+  <a href="/">Главная</a>
+  <h1>Калькулятор процентов</h1>
+  <p>Этот калькулятор создан чтобы быстро решить бытовые и рабочие задачи связанные с процентами. В тексте даём понятные объяснения как вычислить процент от суммы прибавить процент к первоначальной сумме и наоборот как найти само значение если известна итоговая сумма. Приводим пример с реальной ситуацией покупка со скидкой и восстановление первоначальной цены через обратный расчёт. Объясняем где типично допускают ошибки например при вычислении налогов или комиссий и как избежать неточностей при работе с округлениями. Даем рекомендации по использованию калькулятора в бухгалтерских или торговых задачах и совет как проверить результат вручную для уверенности. В тексте также упомянуто что калькулятор полезен для оценки процентного роста показателей бизнеса или для расчёта процентов по вкладам и кредитам в упрощённой форме.</p>
+  
+  <input id="val" type="number" placeholder="Сумма" style="width:45%">
+  <input id="p" type="number" placeholder="Процент" style="width:45%">
+  <button id="c">Посчитать</button>
+  <div id="r" style="margin-top:8px"></div>
+  <script>
+    document.getElementById('c').addEventListener('click',()=>{
+      const v=Number(document.getElementById('val').value)||0;
+      const p=Number(document.getElementById('p').value)||0;
+      const part=v*p/100;
+      const total=v+part;
+      document.getElementById('r').textContent=`Процент ${part.toFixed(2)}. Итог ${total.toFixed(2)}.`;
+    });
+  </script>
+</body>
+</html>
