@@ -4,29 +4,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Калькулятор НДС — EasyTools</title>
-  <meta name="description" content="Рассчитать НДС по ставке. Удобно для быстрых проверок.">
-  <link rel="canonical" href="https://easyconvert.ru/vat.html">
-  <meta property="og:title" content="Калькулятор НДС — EasyTools">
-  <meta property="og:description" content="Быстрый расчёт НДС и суммы с учётом НДС.">
-  <meta property="og:url" content="https://easyconvert.ru/vat.html">
-  <meta name="robots" content="index,follow">
-  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+  <meta name="description" content="Калькулятор НДС. Выделить НДС или включить НДС в цену.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--accent:#2563eb;--bg:#f6f8fb;--card:#fff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#0f172a}
+    .wrap{max-width:760px;margin:28px auto;padding:18px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    main.card{background:var(--card);padding:22px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    input{padding:12px;border-radius:10px;border:1px solid #e6e9ef;font-size:15px}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .result{margin-top:12px;padding:12px;border-radius:10px;background:#f3f6fb}
+    .muted{color:var(--muted);margin-top:12px}
+  </style>
 </head>
 <body>
-  <a href="/">Главная</a>
-  <h1>Калькулятор НДС</h1>
-  <p>Описание калькулятора НДС содержит разъяснение как высчитывается налог в двух направлениях включить НДС в цену и выделить НДС из общей суммы. Объясняем разницу между ставками и даём простой пример расчёта при ставке 20 процентов для понятия логики. Поясняем частые ошибки например путаницу с десятичными знаками и с порядком действий при включении и исключении налога. Есть раздел с практическими подсказками для предпринимателей как быстро проверить суммы по чеку и как использовать инструмент при подготовке первичных бухгалтерских документов. Также отмечаем что калькулятор даёт ориентировочные значения и при официальной отчётности рекомендуется сверяться со специализированными программами или бухгалтером.</p>
-  <input id="a" type="number" placeholder="Сумма" style="width:45%">
-  <input id="r" type="number" placeholder="Ставка %" value="20" style="width:45%">
-  <button id="calc">Посчитать</button>
-  <div id="out" style="margin-top:8px"></div>
+  <div class="wrap">
+    <header><div class="logo">ET</div><div><h1>Калькулятор НДС</h1><div class="muted">Выделение НДС из суммы и включение НДС в цену. Быстрая проверка для чеков.</div></div></header>
+
+    <main class="card">
+      <div class="row">
+        <input id="amount" type="number" placeholder="Сумма" style="width:45%">
+        <input id="rate" type="number" placeholder="Ставка %" value="20" style="width:45%">
+      </div>
+      <div style="margin-top:12px"><button class="btn" id="go">Посчитать</button></div>
+      <div class="result" id="res">Результат появится здесь</div>
+      <div class="muted">Важно: инструмент даёт ориентировочные значения. Для официальной отчётности используйте бухгалтерские программы.</div>
+    </main>
+  </div>
+
   <script>
-    document.getElementById('calc').addEventListener('click',()=>{
-      const a=Number(document.getElementById('a').value)||0;
-      const rate=Number(document.getElementById('r').value)||0;
-      const vat=a*rate/100;
-      const incl=a+vat;
-      document.getElementById('out').textContent=`НДС ${vat.toFixed(2)}. Сумма с НДС ${incl.toFixed(2)}.`;
+    document.getElementById('go').addEventListener('click', ()=> {
+      const a = Number(document.getElementById('amount').value) || 0;
+      const r = Number(document.getElementById('rate').value) || 0;
+      const vat = a * r / 100;
+      const incl = a + vat;
+      document.getElementById('res').textContent = `НДС ${vat.toFixed(2)}. Сумма с НДС ${incl.toFixed(2)}.`;
     });
   </script>
 </body>
