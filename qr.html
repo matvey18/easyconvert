@@ -4,49 +4,82 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Генератор QR кодов — EasyTools</title>
-  <meta name="description" content="Генератор QR кодов для ссылок и текста. Скачивайте картинку в один клик.">
-  <link rel="canonical" href="https://easyconvert.ru/qr.html">
-  <meta property="og:title" content="Генератор QR кодов — EasyTools">
-  <meta property="og:description" content="Создавайте QR коды быстро и бесплатно.">
-  <meta property="og:url" content="https://easyconvert.ru/qr.html">
-  <meta name="robots" content="index,follow">
-  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+  <meta name="description" content="Сгенерируйте QR код для ссылки или текста. Скачать PNG в один клик.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--accent:#2563eb;--bg:#f6f8fb;--card:#fff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#0f172a}
+    .wrap{max-width:820px;margin:28px auto;padding:18px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    main.card{background:var(--card);padding:22px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    h1{margin:0 0 8px 0}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+    input[type=text]{flex:1;padding:12px;border-radius:10px;border:1px solid #e6e9ef;font-size:15px}
+    input[type=number]{width:120px;padding:10px;border-radius:10px;border:1px solid #e6e9ef}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .preview{margin-top:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+    .muted{color:var(--muted);margin-top:12px}
+    .qr-box{border:1px solid #e6e9ef;border-radius:10px;padding:8px;background:#fff}
+  </style>
 </head>
 <body>
-  <a href="/">Главная</a>
-  <h1>Генератор QR кодов</h1>
-  <p>Генератор QR на EasyTools позволяет создавать коды для ссылок и произвольного текста быстро и без лишних настроек. В тексте подробно описано какие параметры можно менять размер количество ошибок исправления и как это влияет на читаемость при сканировании камерами старых телефонов. Приводим практические примеры: создание QR для визитки с контактными данными, для ссылки на страницу оплаты и для текста с инструкциями. Также объясняем как проверить корректность кода на разных устройствах и почему иногда стоит увеличить размер при печати на бумаге. Небольшой раздел посвящён правам использования и лицензиям если используется сторонний API для генерации и разъяснение что при использовании внешних сервисов стоит учитывать политику приватности. В завершении даём советы по скачиванию и оптимизации изображения для веба чтобы не терять качество при загрузке на страницы или в соцсети.</p>
+  <div class="wrap">
+    <header><div class="logo">ET</div><div><h1>Генератор QR кодов</h1><div class="muted">Создайте QR для ссылки или текста и скачайте PNG.</div></div></header>
 
-  <input id="data" placeholder="Введите текст или URL" style="width:70%">
-  <input id="size" type="number" value="200" min="100" max="1000" style="width:90px">
-  <button id="gen">Сгенерировать</button>
-  <button id="dl">Скачать</button>
+    <main class="card">
+      <div class="row">
+        <input id="data" type="text" placeholder="Вставьте ссылку или текст">
+        <input id="size" type="number" value="300" min="100" max="1000">
+        <button class="btn" id="gen">Сгенерировать</button>
+      </div>
 
-  <div style="margin-top:12px">
-    <img id="img" alt="QR" style="border:1px solid #e6e9ef">
+      <div class="preview">
+        <div class="qr-box" id="qrbox" aria-live="polite">
+          <img id="qrimg" alt="QR preview" style="display:block;max-width:320px;height:auto">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button class="btn" id="download">Скачать PNG</button>
+          <button class="btn" id="copylink">Копировать ссылку</button>
+        </div>
+      </div>
+
+      <div class="muted">Примечание: при печати увеличьте размер и проверьте читаемость на устройстве.</div>
+    </main>
   </div>
 
   <script>
-    const gen=document.getElementById('gen');
-    const dl=document.getElementById('dl');
-    const img=document.getElementById('img');
-    gen.addEventListener('click',()=>{
-      const text=document.getElementById('data').value||'';
-      const s=Number(document.getElementById('size').value)||200;
-      if(!text){ alert('Введите текст или URL'); return; }
-      const url='https://api.qrserver.com/v1/create-qr-code/?size=' + s + 'x' + s + '&data=' + encodeURIComponent(text);
-      img.src=url;
-      img.width=s;
-      img.height=s;
+    const gen = document.getElementById('gen');
+    const data = document.getElementById('data');
+    const size = document.getElementById('size');
+    const qrimg = document.getElementById('qrimg');
+    const download = document.getElementById('download');
+    const copylink = document.getElementById('copylink');
+
+    gen.addEventListener('click', ()=> {
+      const txt = data.value.trim();
+      const s = Number(size.value) || 300;
+      if(!txt) return alert('Введите текст или URL');
+      const url = 'https://api.qrserver.com/v1/create-qr-code/?size='+s+'x'+s+'&data='+encodeURIComponent(txt);
+      qrimg.src = url;
+      qrimg.width = s;
+      qrimg.height = s;
     });
-    dl.addEventListener('click',()=>{
-      if(!img.src){ alert('Сначала сгенерируйте QR'); return; }
-      const a=document.createElement('a');
-      a.href=img.src;
-      a.download='qr.png';
+
+    download.addEventListener('click', ()=> {
+      if(!qrimg.src) return alert('Сначала сгенерируйте QR');
+      const a = document.createElement('a');
+      a.href = qrimg.src;
+      a.download = 'qr.png';
       document.body.appendChild(a);
       a.click();
       a.remove();
+    });
+
+    copylink.addEventListener('click', async ()=> {
+      if(!qrimg.src) return alert('Сначала сгенерируйте QR');
+      try { await navigator.clipboard.writeText(qrimg.src); copylink.textContent='Скопировано'; setTimeout(()=>copylink.textContent='Копировать ссылку',1200) } catch(e){ alert('Ошибка копирования') }
     });
   </script>
 </body>
