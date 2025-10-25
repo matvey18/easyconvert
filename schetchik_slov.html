@@ -1,82 +1,53 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Счётчик слов и символов — EasyTools</title>
-  <meta name="description" content="Быстрый онлайн счётчик слов и символов. Узнайте количество слов, символов и примерное время чтения.">
+  <meta name="description" content="Быстрый онлайн счётчик слов и символов.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root{--accent:#2563eb;--bg:#f6f8fb;--card:#fff;--muted:#6b7280}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased}
-    .wrap{max-width:980px;margin:28px auto;padding:18px}
-    header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
-    main.card{background:var(--card);padding:22px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
-    h1{margin:0 0 8px 0}
-    p.lead{margin:0 0 18px 0;color:var(--muted)}
-    textarea{width:100%;min-height:220px;padding:14px;border-radius:10px;border:1px solid #e6e9ef;font-size:15px;resize:vertical}
-    .stats{margin-top:12px;padding:12px;border-radius:10px;background:#f3f6fb;color:#0f172a;display:flex;gap:14px;flex-wrap:wrap}
-    .stat{font-weight:600}
-    .controls{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
-    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
-    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(37,99,235,0.12)}
-    .muted{color:var(--muted);font-size:14px;margin-top:12px}
-    @media(max-width:640px){.stats{flex-direction:column}}
+    :root{--accent:#2563eb;--bg:#f6f8fb;--muted:#6b7280}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#0f172a}
+    .wrap{max-width:980px;margin:24px auto;padding:18px}
+    header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+    .logo{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:800;animation:logo-glow 2400ms ease-in-out infinite}
+    .logo .sub{font-size:11px;margin-top:6px;opacity:0.95}
+    @keyframes logo-glow{0%{transform:scale(1);box-shadow:0 6px 18px rgba(37,99,235,0.12)}50%{transform:scale(1.04);box-shadow:0 20px 60px rgba(37,99,235,0.18)}100%{transform:scale(1);box-shadow:0 6px 18px rgba(37,99,235,0.12)}}
+    .home{margin-left:auto;text-decoration:none;color:var(--accent);font-weight:700}
+    main.card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    h1{margin:4px 0 8px 0}
+    textarea{width:100%;min-height:220px;padding:14px;border-radius:10px;border:1px solid #e6e9ef;font-size:15px}
+    .stats{display:flex;gap:12px;margin-top:12px;color:var(--muted);flex-wrap:wrap}
+    .controls{margin-top:12px;display:flex;gap:10px}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .ghost{background:transparent;border:1px solid rgba(37,99,235,0.12);color:var(--accent)}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="logo">ET</div>
+      <div class="logo">ET<span class="sub">Word Counter</span></div>
       <div>
         <h1>Счётчик слов и символов</h1>
-        <div class="lead muted">Вставьте текст, чтобы получить количество слов, символов и примерное время чтения.</div>
+        <div style="color:var(--muted)">Вставьте текст и получите количество слов, символов и время чтения.</div>
       </div>
+      <a class="home" href="/">← На главную</a>
     </header>
 
-    <main class="card" role="main">
-      <label for="text" class="muted" style="display:block;margin-bottom:8px">Текст для анализа</label>
-      <textarea id="text" placeholder="Вставьте текст сюда"></textarea>
-
-      <div class="stats" id="stats">
-        <div class="stat">Слова 0</div>
-        <div class="stat">Символы 0</div>
-        <div class="stat">Время чтения 0 мин</div>
-      </div>
-
-      <div class="controls">
-        <button class="btn" id="copy">Копировать</button>
-        <button class="btn ghost" id="clear">Очистить</button>
-      </div>
-
-      <div class="muted">Подсказка: удаляйте невидимые символы и HTML теги для корректного подсчёта. Инструмент работает локально в браузере.</div>
+    <main class="card">
+      <textarea id="txt" placeholder="Вставьте текст"></textarea>
+      <div class="stats" id="stats"><div>Слова 0</div><div>Символы 0</div><div>Время чтения 0 мин</div></div>
+      <div class="controls"><button class="btn" id="copy">Копировать</button><button class="btn ghost" id="clear">Очистить</button></div>
     </main>
   </div>
 
   <script>
-    const t = document.getElementById('text');
-    const s = document.getElementById('stats');
-    const copy = document.getElementById('copy');
-    const clear = document.getElementById('clear');
-
-    function update() {
-      const raw = t.value || '';
-      const cleaned = raw.replace(/<[^>]*>/g,'').replace(/\u00A0/g,' ').trim();
-      const chars = cleaned.length;
-      const words = cleaned.length ? cleaned.split(/\s+/).filter(Boolean).length : 0;
-      const minutes = Math.max(0, Math.ceil(words / 200));
-      s.innerHTML = `<div class="stat">Слова ${words}</div><div class="stat">Символы ${chars}</div><div class="stat">Время чтения ${minutes} мин</div>`;
-    }
-
-    t.addEventListener('input', update);
-    copy.addEventListener('click', async ()=> {
-      try { await navigator.clipboard.writeText(t.value); copy.textContent='Скопировано'; setTimeout(()=>copy.textContent='Копировать',1400) } catch(e) { alert('Ошибка копирования') }
-    });
-    clear.addEventListener('click', ()=> { t.value=''; update(); });
-
-    update();
+    const t = document.getElementById('txt'), stats = document.getElementById('stats');
+    function upd(){ const raw = (t.value||'').replace(/<[^>]*>/g,'').trim(); const chars = raw.length; const words = raw? raw.split(/\s+/).filter(Boolean).length:0; const min = Math.max(0, Math.ceil(words/200)); stats.innerHTML = `<div>Слова ${words}</div><div>Символы ${chars}</div><div>Время чтения ${min} мин</div>` }
+    t.addEventListener('input', upd);
+    document.getElementById('copy').addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(t.value); alert('Скопировано') }catch(e){ alert('Ошибка') }});
+    document.getElementById('clear').addEventListener('click', ()=>{ t.value=''; upd(); });
+    upd();
   </script>
 </body>
 </html>
