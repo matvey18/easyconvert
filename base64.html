@@ -3,36 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Base64 кодирование и декодирование — EasyTools</title>
-  <meta name="description" content="Кодирование и декодирование строк в Base64. Удобно для тестов и отладки.">
-  <link rel="canonical" href="https://easyconvert.ru/base64.html">
-  <meta property="og:title" content="Base64 кодирование — EasyTools">
-  <meta property="og:description" content="Кодирование и декодирование строк в Base64 прямо в браузере.">
-  <meta property="og:url" content="https://easyconvert.ru/base64.html">
-  <meta name="robots" content="index,follow">
-  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+  <title>Base64 кодирование — EasyTools</title>
+  <meta name="description" content="Кодирование и декодирование строк в Base64 прямо в браузере.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--accent:#2563eb;--bg:#f6f8fb;--card:#fff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#0f172a}
+    .wrap{max-width:880px;margin:28px auto;padding:18px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    main.card{background:var(--card);padding:22px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    h1{margin:0 0 8px 0}
+    textarea{width:100%;min-height:180px;padding:14px;border-radius:10px;border:1px solid #e6e9ef;font-size:15px}
+    .controls{display:flex;gap:10px;margin-top:12px}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .btn.ghost{background:transparent;border:1px solid rgba(37,99,235,0.12);color:var(--accent)}
+    .muted{color:var(--muted);margin-top:12px}
+  </style>
 </head>
 <body>
-  <a href="/">Главная</a>
-  <h1>Base64 кодирование и декодирование</h1>
-  <p>Эта страница объясняет зачем нужен Base64 и когда его удобно применять. Описываем типичные сценарии: кодирование небольших текстовых фрагментов для передачи в URL или хранение бинарных данных в текстовых форматах, быстрые тесты при отладке API и проверка корректности передачи изображений в формате data URI. Текст даёт понятную инструкцию как кодировать и декодировать строки и что делать если появляются ошибки связанные с кодировкой символов UTF 8. Приводим пример: как закодировать простую фразу и как декодировать обратно, с пояснением возможных проблем при переносе между разными языками программирования. Отдельно раскрывается тема безопасности что Base64 не является шифрованием и не защищает конфиденциальную информацию. В конце даём рекомендации по использованию инструмента в рабочих сценариях и советы по интеграции в простые тестовые скрипты.</p>
-  <textarea id="t" rows="6" style="width:100%"></textarea>
-  <div style="margin-top:8px">
-    <button id="enc">Кодировать</button>
-    <button id="dec">Декодировать</button>
-    <button id="cp">Копировать</button>
+  <div class="wrap">
+    <header><div class="logo">ET</div><div><h1>Base64 кодирование</h1><div class="muted">Кодируйте и декодируйте строки. Помним про кодировку UTF 8.</div></div></header>
+
+    <main class="card">
+      <label for="txt" class="muted">Текст или Base64</label>
+      <textarea id="txt" placeholder="Введите текст для кодирования или Base64 для декодирования"></textarea>
+
+      <div class="controls">
+        <button class="btn" id="enc">Кодировать</button>
+        <button class="btn" id="dec">Декодировать</button>
+        <button class="btn ghost" id="copy">Копировать</button>
+      </div>
+
+      <div class="muted">Примечание: Base64 это кодирование, а не шифрование. Не используйте для защиты секретных данных.</div>
+    </main>
   </div>
 
   <script>
-    const t=document.getElementById('t');
-    document.getElementById('enc').addEventListener('click',()=>{
-      try{ t.value=btoa(unescape(encodeURIComponent(t.value||''))); }catch(e){ alert('Ошибка кодирования'); }
+    const txt = document.getElementById('txt');
+    document.getElementById('enc').addEventListener('click', ()=> {
+      try { txt.value = btoa(unescape(encodeURIComponent(txt.value||''))); } catch(e) { alert('Ошибка кодирования: проверьте вводимые символы') }
     });
-    document.getElementById('dec').addEventListener('click',()=>{
-      try{ t.value=decodeURIComponent(escape(atob(t.value||''))); }catch(e){ alert('Ошибка декодирования'); }
+    document.getElementById('dec').addEventListener('click', ()=> {
+      try { txt.value = decodeURIComponent(escape(atob(txt.value||''))); } catch(e) { alert('Ошибка декодирования: неверный Base64') }
     });
-    document.getElementById('cp').addEventListener('click',async ()=>{
-      try{ await navigator.clipboard.writeText(t.value); alert('Скопировано'); }catch(e){ alert('Ошибка копирования'); }
+    document.getElementById('copy').addEventListener('click', async ()=> {
+      try { await navigator.clipboard.writeText(txt.value); document.getElementById('copy').textContent='Скопировано'; setTimeout(()=>document.getElementById('copy').textContent='Копировать',1200) } catch(e) { alert('Ошибка копирования') }
     });
   </script>
 </body>
