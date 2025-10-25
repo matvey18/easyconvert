@@ -4,28 +4,74 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Hex RGB конвертер — EasyTools</title>
-  <meta name="description" content="Преобразование hex в rgb и обратно.">
-  <link rel="canonical" href="https://easyconvert.ru/color.html">
-  <meta name="robots" content="index,follow">
-  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+  <meta name="description" content="Преобразование значения цвета между hex и rgb. Удобно для верстки и дизайна.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--accent:#2563eb;--bg:#f6f8fb;--card:#fff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#0f172a}
+    .wrap{max-width:720px;margin:28px auto;padding:18px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    main.card{background:var(--card);padding:22px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    input{padding:12px;border-radius:10px;border:1px solid #e6e9ef;font-size:15px}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .preview{margin-top:12px;height:80px;border-radius:10px;border:1px solid #e6e9ef;background:#fff;display:flex;align-items:center;justify-content:center}
+    .muted{color:var(--muted);margin-top:12px}
+  </style>
 </head>
 <body>
-  <a href="/">Главная</a>
-  <h1>Hex RGB конвертер</h1>
-  <p>Этот инструмент полезен для дизайнеров и разработчиков которые быстро переводят цветовые коды из hex формата в rgb и обратно. Текст объясняет структуру hex кода и как преобразовать сокращённый формат в полный, показывает пример перевода и как проверить результат визуально. Приводим практические советы по совместимости цветов в разных браузерах и по использованию полученных значений в CSS стилях или в графических редакторах. Небольшой раздел посвящён выбору контрастных пар цветов для удобочитаемости текста на фоне и как быстро проверять доступность сочетаний цветов. В конце советы по копированию результатов и вставке в проекты чтобы не допустить ошибок при ручной правке стилей.</p>
-  <input id="hex" placeholder="#rrggbb" style="width:45%">
-  <input id="rgb" placeholder="rgb(255,255,255)" style="width:45%">
-  <button id="conv">Преобразовать</button>
-  <div id="out" style="margin-top:8px"></div>
+  <div class="wrap">
+    <header><div class="logo">ET</div><div><h1>Hex RGB конвертер</h1><div class="muted">Преобразование кодов цветов между hex и rgb. Проверка контраста.</div></div></header>
+
+    <main class="card">
+      <div class="row">
+        <input id="hex" placeholder="#rrggbb" style="width:45%">
+        <input id="rgb" placeholder="rgb(255,255,255)" style="width:45%">
+      </div>
+      <div style="margin-top:12px">
+        <button class="btn" id="conv">Преобразовать</button>
+      </div>
+
+      <div class="preview" id="preview">Превью цвета</div>
+      <div class="muted">Подсказка: вводите сокращённый формат #f0a или полный #ff00aa.</div>
+    </main>
+  </div>
+
   <script>
-    function h2r(h){h=h.replace('#',''); if(h.length===3) h=h.split('').map(c=>c+c).join(''); const n=parseInt(h,16); return [(n>>16)&255,(n>>8)&255,n&255];}
-    function r2h(r,g,b){return '#'+[r,g,b].map(x=>Number(x).toString(16).padStart(2,'0')).join('');}
-    document.getElementById('conv').addEventListener('click',()=>{
-      const h=document.getElementById('hex').value.trim();
-      const r=document.getElementById('rgb').value.trim();
-      if(h){ try{const [a,b,c]=h2r(h); document.getElementById('out').textContent=`rgb(${a}, ${b}, ${c})`}catch(e){document.getElementById('out').textContent='Неверный hex'} }
-      else if(r){ try{const p=r.replace('rgb','').replace(/\(|\)/g,'').split(',').map(s=>s.trim()); const hex=r2h(p[0],p[1],p[2]); document.getElementById('out').textContent=hex }catch(e){document.getElementById('out').textContent='Неверный rgb'} }
-      else document.getElementById('out').textContent='Введите hex или rgb';
+    function hexToRgb(h){
+      h = h.replace('#','').trim();
+      if(h.length === 3) h = h.split('').map(c=>c+c).join('');
+      const n = parseInt(h,16);
+      return [(n>>16)&255,(n>>8)&255,n&255];
+    }
+    function rgbToHex(r,g,b){
+      return '#'+[r,g,b].map(x=>Number(x).toString(16).padStart(2,'0')).join('');
+    }
+
+    document.getElementById('conv').addEventListener('click', ()=>{
+      const h = document.getElementById('hex').value.trim();
+      const r = document.getElementById('rgb').value.trim();
+      const preview = document.getElementById('preview');
+      try {
+        if(h){
+          const [a,b,c] = hexToRgb(h);
+          document.getElementById('rgb').value = `rgb(${a}, ${b}, ${c})`;
+          preview.style.background = `rgb(${a}, ${b}, ${c})`;
+          preview.textContent = '';
+        } else if(r){
+          const parts = r.replace('rgb','').replace(/\(|\)/g,'').split(',').map(s=>s.trim());
+          const hex = rgbToHex(parts[0],parts[1],parts[2]);
+          document.getElementById('hex').value = hex;
+          preview.style.background = hex;
+          preview.textContent = '';
+        } else {
+          preview.textContent = 'Введите hex или rgb';
+        }
+      } catch(e) {
+        preview.textContent = 'Неверный формат';
+      }
     });
   </script>
 </body>
