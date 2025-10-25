@@ -1,35 +1,82 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Счётчик слов онлайн — EasyTools</title>
-<meta name="description" content="Быстрый онлайн счётчик слов и символов. Вставьте текст и узнайте количество слов, символов и примерное время чтения.">
-<link rel="canonical" href="https://easyconvert.ru/schetchik_slov.html">
-<meta property="og:title" content="Счётчик слов онлайн — EasyTools">
-<meta property="og:description" content="Узнайте количество слов и символов за секунды. Удобно для постов и метаописаний.">
-<meta property="og:url" content="https://easyconvert.ru/schetchik_slov.html">
-<meta name="robots" content="index,follow">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Счётчик слов онлайн","url":"https://easyconvert.ru/schetchik_slov.html","description":"Онлайн счётчик слов и символов. Быстро и бесплатно."}</script>
-<style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Счётчик слов и символов — EasyTools</title>
+  <meta name="description" content="Быстрый онлайн счётчик слов и символов. Узнайте количество слов, символов и примерное время чтения.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--accent:#2563eb;--bg:#f6f8fb;--card:#fff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#0f172a;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:980px;margin:28px auto;padding:18px}
+    header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    main.card{background:var(--card);padding:22px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    h1{margin:0 0 8px 0}
+    p.lead{margin:0 0 18px 0;color:var(--muted)}
+    textarea{width:100%;min-height:220px;padding:14px;border-radius:10px;border:1px solid #e6e9ef;font-size:15px;resize:vertical}
+    .stats{margin-top:12px;padding:12px;border-radius:10px;background:#f3f6fb;color:#0f172a;display:flex;gap:14px;flex-wrap:wrap}
+    .stat{font-weight:600}
+    .controls{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(37,99,235,0.12)}
+    .muted{color:var(--muted);font-size:14px;margin-top:12px}
+    @media(max-width:640px){.stats{flex-direction:column}}
+  </style>
 </head>
 <body>
-<a href="/">Главная</a>
-<h1>Счётчик слов онлайн</h1>
-<p>Этот счётчик слов создан чтобы быстро решить практическую задачу автора, редактора или маркетолога. Вставьте текст в поле и вы моментально получите точные метрики: количество слов, количество символов, а также примерное время чтения, которое удобно учитывать при планировании публикаций. Кроме базовых цифр инструмент показывает, как длина текста соотносится с рекомендованными значениями для заголовков, постов в соцсетях и описаний к страницам. Частая проблема при подсчёте — это лишние пробелы, невидимые символы и HTML‑теги, которые искажают результаты. Чтобы получить корректный подсчёт, очистите текст от служебных символов или используйте наш инструмент параллельно с функцией удаления HTML. Для блогеров и менеджеров по контенту это экономит время и повышает качество материалов.</p>
+  <div class="wrap">
+    <header>
+      <div class="logo">ET</div>
+      <div>
+        <h1>Счётчик слов и символов</h1>
+        <div class="lead muted">Вставьте текст, чтобы получить количество слов, символов и примерное время чтения.</div>
+      </div>
+    </header>
 
+    <main class="card" role="main">
+      <label for="text" class="muted" style="display:block;margin-bottom:8px">Текст для анализа</label>
+      <textarea id="text" placeholder="Вставьте текст сюда"></textarea>
 
-<p>Ниже приведены практические примеры: если вы готовите заголовок для статьи, держите его в пределах 6–12 слов; для поста в социальных сетях оптимально 40–80 слов, а для полноценной статьи ориентируйтесь на 800–1500 слов в зависимости от темы. Также мы рекомендуем проверять время чтения: если ваш текст рассчитан на формат быстрого прочтения, цель — 1–3 минуты, для более глубоких материалов — 5–10 минут и более. Инструмент работает локально в браузере, данные не отправляются на сервер, можно безопасно использовать текст с конфиденциальной информацией.</p>
+      <div class="stats" id="stats">
+        <div class="stat">Слова 0</div>
+        <div class="stat">Символы 0</div>
+        <div class="stat">Время чтения 0 мин</div>
+      </div>
 
+      <div class="controls">
+        <button class="btn" id="copy">Копировать</button>
+        <button class="btn ghost" id="clear">Очистить</button>
+      </div>
 
-<textarea id="t" rows="8" style="width:100%"></textarea>
-<div id="res" style="margin-top:8px;color:#333">Слова 0. Символы 0. Время чтения 0 минут.</div>
+      <div class="muted">Подсказка: удаляйте невидимые символы и HTML теги для корректного подсчёта. Инструмент работает локально в браузере.</div>
+    </main>
+  </div>
 
+  <script>
+    const t = document.getElementById('text');
+    const s = document.getElementById('stats');
+    const copy = document.getElementById('copy');
+    const clear = document.getElementById('clear');
 
-<script>
-const t=document.getElementById('t'); const r=document.getElementById('res');
-function upd(){ const s=t.value.trim(); const chars=s.length; const words=s? s.split(/\s+/).length:0; const min=Math.ceil(words/200); r.textContent=`Слова ${words}. Символы ${chars}. Время чтения ${min} минут.`; }
-t.addEventListener('input',upd); upd();
-</script>
+    function update() {
+      const raw = t.value || '';
+      const cleaned = raw.replace(/<[^>]*>/g,'').replace(/\u00A0/g,' ').trim();
+      const chars = cleaned.length;
+      const words = cleaned.length ? cleaned.split(/\s+/).filter(Boolean).length : 0;
+      const minutes = Math.max(0, Math.ceil(words / 200));
+      s.innerHTML = `<div class="stat">Слова ${words}</div><div class="stat">Символы ${chars}</div><div class="stat">Время чтения ${minutes} мин</div>`;
+    }
+
+    t.addEventListener('input', update);
+    copy.addEventListener('click', async ()=> {
+      try { await navigator.clipboard.writeText(t.value); copy.textContent='Скопировано'; setTimeout(()=>copy.textContent='Копировать',1400) } catch(e) { alert('Ошибка копирования') }
+    });
+    clear.addEventListener('click', ()=> { t.value=''; update(); });
+
+    update();
+  </script>
 </body>
 </html>
