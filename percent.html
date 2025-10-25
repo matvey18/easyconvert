@@ -4,30 +4,49 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Калькулятор процентов — EasyTools</title>
-  <meta name="description" content="Калькулятор процентов онлайн. Рассчитать процент от суммы и итоговую сумму.">
-  <link rel="canonical" href="https://easyconvert.ru/percent.html">
-  <meta property="og:title" content="Калькулятор процентов — EasyTools">
-  <meta property="og:description" content="Удобный калькулятор процентов для скидок и прироста.">
-  <meta property="og:url" content="https://easyconvert.ru/percent.html">
-  <meta name="robots" content="index,follow">
-  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+  <meta name="description" content="Онлайн калькулятор процентов. Расчёт процента от суммы и итоговой суммы.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--accent:#2563eb;--bg:#f6f8fb;--card:#fff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#0f172a}
+    .wrap{max-width:760px;margin:28px auto;padding:18px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    main.card{background:var(--card);padding:22px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    input{padding:12px;border-radius:10px;border:1px solid #e6e9ef;font-size:15px}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .result{margin-top:12px;padding:12px;border-radius:10px;background:#f3f6fb}
+    .muted{color:var(--muted);margin-top:12px}
+  </style>
 </head>
 <body>
-  <a href="/">Главная</a>
-  <h1>Калькулятор процентов</h1>
-  <p>Этот калькулятор создан чтобы быстро решить бытовые и рабочие задачи связанные с процентами. В тексте даём понятные объяснения как вычислить процент от суммы прибавить процент к первоначальной сумме и наоборот как найти само значение если известна итоговая сумма. Приводим пример с реальной ситуацией покупка со скидкой и восстановление первоначальной цены через обратный расчёт. Объясняем где типично допускают ошибки например при вычислении налогов или комиссий и как избежать неточностей при работе с округлениями. Даем рекомендации по использованию калькулятора в бухгалтерских или торговых задачах и совет как проверить результат вручную для уверенности. В тексте также упомянуто что калькулятор полезен для оценки процентного роста показателей бизнеса или для расчёта процентов по вкладам и кредитам в упрощённой форме.</p>
-  
-  <input id="val" type="number" placeholder="Сумма" style="width:45%">
-  <input id="p" type="number" placeholder="Процент" style="width:45%">
-  <button id="c">Посчитать</button>
-  <div id="r" style="margin-top:8px"></div>
+  <div class="wrap">
+    <header><div class="logo">ET</div><div><h1>Калькулятор процентов</h1><div class="muted">Вычисляйте процент от суммы, добавляйте процент или восстанавливайте исходную цену.</div></div></header>
+
+    <main class="card">
+      <div class="row">
+        <input id="value" type="number" placeholder="Сумма" style="width:45%">
+        <input id="percent" type="number" placeholder="Процент" style="width:45%">
+      </div>
+      <div style="margin-top:12px">
+        <button class="btn" id="calc">Посчитать</button>
+      </div>
+      <div class="result" id="out">Результат появится здесь</div>
+      <div class="muted">Пример: товар 5000, скидка 15% показывает сумму скидки и итоговую цену.</div>
+    </main>
+  </div>
+
   <script>
-    document.getElementById('c').addEventListener('click',()=>{
-      const v=Number(document.getElementById('val').value)||0;
-      const p=Number(document.getElementById('p').value)||0;
-      const part=v*p/100;
-      const total=v+part;
-      document.getElementById('r').textContent=`Процент ${part.toFixed(2)}. Итог ${total.toFixed(2)}.`;
+    const calc = document.getElementById('calc');
+    const out = document.getElementById('out');
+    calc.addEventListener('click', ()=> {
+      const v = Number(document.getElementById('value').value) || 0;
+      const p = Number(document.getElementById('percent').value) || 0;
+      const part = v * p / 100;
+      const total = v + part;
+      out.textContent = `Процент ${part.toFixed(2)}. Итог ${total.toFixed(2)}.`;
     });
   </script>
 </body>
