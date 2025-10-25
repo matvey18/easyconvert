@@ -3,53 +3,88 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Генератор паролей онлайн — EasyTools</title>
-  <meta name="description" content="Создавайте сильные пароли онлайн. Настройте длину и набор символов. Работа полностью в браузере.">
-  <link rel="canonical" href="https://easyconvert.ru/generator_paroley.html">
-  <meta property="og:title" content="Генератор паролей — EasyTools">
-  <meta property="og:description" content="Генератор уникальных и безопасных паролей прямо в браузере.">
-  <meta property="og:url" content="https://easyconvert.ru/generator_paroley.html">
-  <meta name="robots" content="index,follow">
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebPage","name":"Генератор паролей","url":"https://easyconvert.ru/generator_paroley.html","description":"Генератор паролей онлайн. Длина пароля и набор символов настраиваются."}
-  </script>
-  <style>body{font-family:Arial,Helvetica,sans-serif;padding:18px}</style>
+  <title>Генератор паролей — EasyTools</title>
+  <meta name="description" content="Генератор уникальных паролей онлайн. Настройте длину и набор символов. Работа в браузере.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--accent:#2563eb;--bg:#f6f8fb;--card:#fff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:#0f172a}
+    .wrap{max-width:820px;margin:28px auto;padding:18px}
+    header{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
+    main.card{background:var(--card);padding:22px;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    h1{margin:0 0 8px 0}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;align-items:center}
+    input[type=number]{width:110px;padding:10px;border-radius:10px;border:1px solid #e6e9ef}
+    label{font-size:14px}
+    .checkboxes{display:flex;gap:10px;flex-wrap:wrap}
+    .output{margin-top:14px;display:flex;gap:10px}
+    .outinput{flex:1;padding:12px;border-radius:10px;border:1px solid #e6e9ef;font-size:15px}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+    .btn.ghost{background:transparent;border:1px solid rgba(37,99,235,0.12);color:var(--accent)}
+    .muted{color:var(--muted);margin-top:12px}
+    @media(max-width:600px){.controls{flex-direction:column;align-items:stretch}.checkboxes{flex-direction:column}}
+  </style>
 </head>
 <body>
-  <a href="/">Главная</a>
-  <h1>Генератор паролей</h1>
-  <p>Генератор паролей на EasyTools предназначен для тех кто ценит баланс между надёжностью и удобством запоминания. В описании подробно объясняем какие параметры влияют на стойкость пароля длина набор символов и случайность. Приводим практический пример: как собрать надежный пароль под рабочую почту и как другой пароль для личных сервисов. Текст объясняет почему нельзя использовать один и тот же пароль на разных ресурсах и как правильно управлять паролями с помощью менеджеров. Для начинающих добавлены понятные рекомендации: минимальная длина 12 символов если используешь цифры и заглавные буквы можно снизить вероятность взлома. Отдельно упомянуто что генерация происходит локально в браузере и данные не отправляются на сервер это важно для приватности. В конце приводятся советы по созданию запоминающегося но безопасного пароля с использованием мнемоник и примеры преобразования фразы в сложный пароль.</p>
-  <div>
-    <label>Длина <input id="len" type="number" value="16" min="4" max="64" style="width:80px"></label>
-    <label><input id="u" type="checkbox" checked> Заглавные</label>
-    <label><input id="l" type="checkbox" checked> Строчные</label>
-    <label><input id="n" type="checkbox" checked> Цифры</label>
-    <label><input id="s" type="checkbox"> Символы</label>
-    <button id="gen">Сгенерировать</button>
+  <div class="wrap">
+    <header><div class="logo">ET</div><div><h1>Генератор паролей</h1><div class="muted">Создавайте надёжные пароли с настройкой длины и набора символов. Всё локально в браузере.</div></div></header>
+
+    <main class="card">
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <label>Длина <input id="len" type="number" value="16" min="4" max="64"></label>
+        <div class="checkboxes">
+          <label><input id="upper" type="checkbox" checked> Заглавные</label>
+          <label><input id="lower" type="checkbox" checked> Строчные</label>
+          <label><input id="digits" type="checkbox" checked> Цифры</label>
+          <label><input id="symbols" type="checkbox"> Символы</label>
+        </div>
+        <button class="btn" id="gen">Сгенерировать</button>
+      </div>
+
+      <div class="output">
+        <input id="out" class="outinput" readonly aria-label="Сгенерированный пароль">
+        <button class="btn ghost" id="copy">Копировать</button>
+      </div>
+
+      <div class="muted">Рекомендация: для важного аккаунта используйте длину 16 и более символов. Используйте менеджер паролей для хранения.</div>
+    </main>
   </div>
 
-  <input id="out" style="width:100%;margin-top:10px" readonly>
-
   <script>
-    function gen(len,opts){
-      const upper='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      const lower='abcdefghijklmnopqrstuvwxyz';
-      const nums='0123456789';
-      const sy='!@#$%&*()_+=[]{};:,.<>?';
+    const len = document.getElementById('len');
+    const upper = document.getElementById('upper');
+    const lower = document.getElementById('lower');
+    const digits = document.getElementById('digits');
+    const symbols = document.getElementById('symbols');
+    const gen = document.getElementById('gen');
+    const out = document.getElementById('out');
+    const copy = document.getElementById('copy');
+
+    function generate(n, opts){
+      const U='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const L='abcdefghijklmnopqrstuvwxyz';
+      const D='0123456789';
+      const S='!@#$%&*()_+=[]{};:,.<>?';
       let pool='';
-      if(opts.u)pool+=upper;
-      if(opts.l)pool+=lower;
-      if(opts.n)pool+=nums;
-      if(opts.s)pool+=sy;
+      if(opts.u) pool += U;
+      if(opts.l) pool += L;
+      if(opts.d) pool += D;
+      if(opts.s) pool += S;
       if(!pool) return '';
-      let r='';
-      for(let i=0;i<len;i++) r+=pool.charAt(Math.floor(Math.random()*pool.length));
-      return r;
+      let res='';
+      for(let i=0;i<n;i++) res += pool.charAt(Math.floor(Math.random()*pool.length));
+      return res;
     }
-    document.getElementById('gen').addEventListener('click',()=>{
-      const len=Number(document.getElementById('len').value)||16;
-      const opts={u:document.getElementById('u').checked,l:document.getElementById('l').checked,n:document.getElementById('n').checked,s:document.getElementById('s').checked};
-      document.getElementById('out').value=gen(len,opts);
+
+    gen.addEventListener('click', ()=> {
+      const p = generate(Number(len.value)||16, {u:upper.checked, l:lower.checked, d:digits.checked, s:symbols.checked});
+      out.value = p;
+    });
+
+    copy.addEventListener('click', async ()=> {
+      try { await navigator.clipboard.writeText(out.value); copy.textContent='Скопировано'; setTimeout(()=>copy.textContent='Копировать',1200) } catch(e) { alert('Ошибка копирования') }
     });
   </script>
 </body>
